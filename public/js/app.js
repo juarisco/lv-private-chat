@@ -14184,8 +14184,9 @@ module.exports = __webpack_require__(43);
 
 /***/ }),
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -14204,9 +14205,11 @@ window.Vue = __webpack_require__(35);
  */
 
 Vue.component('example-component', __webpack_require__(39));
+// import ExampleComponent from './components/ExampleComponent.vue'
 
 var app = new Vue({
   el: '#app'
+  // components:{ExampleComponent}
 });
 
 /***/ }),
