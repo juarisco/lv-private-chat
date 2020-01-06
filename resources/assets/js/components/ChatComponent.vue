@@ -1,15 +1,16 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-3">
                 <div class="card card-default">
-                    <div class="card-header">Example Component</div>
+                    <div class="card-header">Private Chat App</div>
+                    <ul class="list-group">
+                        <li class="list-group-item">lorem ipsum</li>
+                    </ul>
 
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
                 </div>
             </div>
+            <div class="col-md-9"></div>
         </div>
     </div>
 </template>

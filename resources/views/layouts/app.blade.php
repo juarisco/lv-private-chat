@@ -74,7 +74,7 @@
 
         <main class="py-4">
 {{--            @yield('content')--}}
-            <example-component></example-component>
+            <chat-component></chat-component>
         </main>
     </div>
 </body>
