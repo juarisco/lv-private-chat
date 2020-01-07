@@ -5,7 +5,11 @@
                 <div class="card card-default">
                     <div class="card-header">Private Chat App</div>
                     <ul class="list-group">
-                        <li class="list-group-item">lorem ipsum</li>
+                        <li class="list-group-item"
+                            v-for="friend in friends"
+                            :key="friend.id">
+                            <a href="" @click.prevent="">{{ friend.name }}</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -23,19 +27,23 @@
         components: {MessageComponent},
         data() {
             return {
-                open: true
+                open: true,
+                friends: []
             }
         },
         methods: {
             close() {
                 this.open = false
+            },
+            getFriends() {
+                axios.post('/getFriends').then((res) => {
+                    this.friends = res.data
+                })
             }
         },
         created() {
-
+            this.getFriends()
         },
-        mounted() {
-            console.log('Component mounted.')
-        }
+
     }
 </script>

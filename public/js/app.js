@@ -49295,6 +49295,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -49302,18 +49306,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: { MessageComponent: __WEBPACK_IMPORTED_MODULE_0__MessageComponent___default.a },
     data: function data() {
         return {
-            open: true
+            open: true,
+            friends: []
         };
     },
 
     methods: {
         close: function close() {
             this.open = false;
+        },
+        getFriends: function getFriends() {
+            var _this = this;
+
+            axios.post('/getFriends').then(function (res) {
+                _this.friends = res.data;
+            });
         }
     },
-    created: function created() {},
-    mounted: function mounted() {
-        console.log('Component mounted.');
+    created: function created() {
+        this.getFriends();
     }
 });
 
@@ -50001,7 +50012,39 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "card card-default" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v("Private Chat App")
+          ]),
+          _vm._v(" "),
+          _c(
+            "ul",
+            { staticClass: "list-group" },
+            _vm._l(_vm.friends, function(friend) {
+              return _c(
+                "li",
+                { key: friend.id, staticClass: "list-group-item" },
+                [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(friend.name))]
+                  )
+                ]
+              )
+            }),
+            0
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -50016,22 +50059,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3" }, [
-      _c("div", { staticClass: "card card-default" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v("Private Chat App")]),
-        _vm._v(" "),
-        _c("ul", { staticClass: "list-group" }, [
-          _c("li", { staticClass: "list-group-item" }, [_vm._v("lorem ipsum")])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

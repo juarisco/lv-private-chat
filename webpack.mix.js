@@ -15,7 +15,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css');
 
 mix.browserSync({
-    proxy: 'http://private-chat.test/home',
+    proxy: 'http://private-chat.test',
     open: false
 });
 

@@ -26,7 +26,12 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
-        return  UserResource::collection(User::all());
+//        return  UserResource::collection(User::all());
 
+    }
+
+    public function getFriends()
+    {
+        return User::all();
     }
 }
