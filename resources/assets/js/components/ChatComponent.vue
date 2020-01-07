@@ -5,11 +5,12 @@
                 <div class="card card-default">
                     <div class="card-header">Private Chat App</div>
                     <ul class="list-group">
-                        <li class="list-group-item"
-                            v-for="friend in friends"
-                            :key="friend.id">
-                            <a href="" @click.prevent="">{{ friend.name }}</a>
-                        </li>
+                        <a href=""
+                           @click.prevent=""
+                           v-for="friend in friends"
+                           :key="friend.id">
+                            <li class="list-group-item">{{ friend.name }}</li>
+                        </a>
                     </ul>
                 </div>
             </div>
@@ -37,7 +38,7 @@
             },
             getFriends() {
                 axios.post('/getFriends').then((res) => {
-                    this.friends = res.data
+                    this.friends = res.data.data
                 })
             }
         },

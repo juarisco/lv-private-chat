@@ -49299,6 +49299,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -49319,7 +49320,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.post('/getFriends').then(function (res) {
-                _this.friends = res.data;
+                _this.friends = res.data.data;
             });
         }
     },
@@ -50023,21 +50024,20 @@ var render = function() {
             { staticClass: "list-group" },
             _vm._l(_vm.friends, function(friend) {
               return _c(
-                "li",
-                { key: friend.id, staticClass: "list-group-item" },
+                "a",
+                {
+                  key: friend.id,
+                  attrs: { href: "" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                    }
+                  }
+                },
                 [
-                  _c(
-                    "a",
-                    {
-                      attrs: { href: "" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(friend.name))]
-                  )
+                  _c("li", { staticClass: "list-group-item" }, [
+                    _vm._v(_vm._s(friend.name))
+                  ])
                 ]
               )
             }),
