@@ -49793,12 +49793,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            chats: []
+            chats: [],
+            session_block: false
         };
+    },
+    created: function created() {
+        this.chats.push({
+            message: 'Hey'
+        }, {
+            message: 'How are u?'
+        }, {
+            message: 'Im at bottom'
+        });
     },
 
     methods: {
@@ -49810,16 +49825,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         clear: function clear() {
             this.chats = [];
+        },
+        block: function block() {
+            this.session_block = true;
+        },
+        unblock: function unblock() {
+            this.session_block = false;
         }
-    },
-    created: function created() {
-        this.chats.push({
-            message: 'Hey'
-        }, {
-            message: 'How are u?'
-        }, {
-            message: 'Im at bottom'
-        });
     }
 });
 
@@ -49833,7 +49845,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card card-default chat-box" }, [
     _c("div", { staticClass: "card-header" }, [
-      _vm._v("\n        Chats\n        "),
+      _c("b", { class: { "text-danger": _vm.session_block } }, [
+        _vm._v("\n            User Name\n            "),
+        _vm.session_block ? _c("span", [_vm._v("(Blocked)")]) : _vm._e()
+      ]),
       _vm._v(" "),
       _c(
         "a",
@@ -49859,9 +49874,35 @@ var render = function() {
             attrs: { "aria-labelledby": "dropdownMenuButton" }
           },
           [
-            _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-              _vm._v("Block")
-            ]),
+            _vm.session_block
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.unblock($event)
+                      }
+                    }
+                  },
+                  [_vm._v("UnBlock")]
+                )
+              : _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.block($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Block")]
+                ),
             _vm._v(" "),
             _c(
               "a",
@@ -49907,7 +49948,18 @@ var render = function() {
           }
         }
       },
-      [_vm._m(1)]
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: "write your message here",
+              disabled: _vm.session_block
+            }
+          })
+        ])
+      ]
     )
   ])
 }
@@ -49928,17 +49980,6 @@ var staticRenderFns = [
       },
       [_c("i", { staticClass: "fa fa-ellipsis-v" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "write your message here" }
-      })
-    ])
   }
 ]
 render._withStripped = true

@@ -1,7 +1,11 @@
 <template>
     <div class="card card-default chat-box">
         <div class="card-header">
-            Chats
+            <b :class="{'text-danger':session_block}">
+                User Name
+                <span v-if="session_block">(Blocked)</span>
+            </b>
+
             <!-- Close button -->
             <a href="" @click.prevent="close">
                 <i class="fa fa-times float-right"></i>
@@ -13,7 +17,8 @@
                     <i class="fa fa-ellipsis-v"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Block</a>
+                    <a class="dropdown-item" href="#" @click.prevent="unblock" v-if="session_block">UnBlock</a>
+                    <a class="dropdown-item" href="#" @click.prevent="block" v-else>Block</a>
                     <a class="dropdown-item" href="#" @click.prevent="clear">Clear Chat</a>
                 </div>
             </div>
@@ -26,7 +31,7 @@
         </div>
         <form class="card-footer" @submit.prevent="send">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="write your message here">
+                <input type="text" class="form-control" placeholder="write your message here" :disabled="session_block">
             </div>
         </form>
 
@@ -39,17 +44,7 @@
         data() {
             return {
                 chats: [],
-            }
-        },
-        methods: {
-            send() {
-                console.log('yeah!')
-            },
-            close() {
-                this.$emit('close')
-            },
-            clear() {
-                this.chats = []
+                session_block: false
             }
         },
         created() {
@@ -64,6 +59,23 @@
                     message: 'Im at bottom'
                 }
             )
+        },
+        methods: {
+            send() {
+                console.log('yeah!')
+            },
+            close() {
+                this.$emit('close')
+            },
+            clear() {
+                this.chats = []
+            },
+            block() {
+                this.session_block = true
+            },
+            unblock() {
+                this.session_block = false
+            }
         }
     }
 </script>
