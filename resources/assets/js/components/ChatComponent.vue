@@ -6,7 +6,7 @@
                     <div class="card-header">Private Chat App</div>
                     <ul class="list-group">
                         <a href=""
-                           @click.prevent=""
+                           @click.prevent="openChat(friend)"
                            v-for="friend in friends"
                            :key="friend.id">
                             <li class="list-group-item">{{ friend.name }}</li>
@@ -15,7 +15,13 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <message-component v-if="open" @close="close"></message-component>
+
+                <span v-for="friend in friends" :key="friend.id">
+                    <message-component
+                        v-if="friend.session.open"
+                        @close="close(friend)"
+                        :friend="friend"/>
+                </span>
             </div>
         </div>
     </div>
@@ -28,18 +34,23 @@
         components: {MessageComponent},
         data() {
             return {
-                open: true,
                 friends: []
             }
         },
         methods: {
-            close() {
-                this.open = false
+            close(friend) {
+                friend.session.open = false
             },
             getFriends() {
                 axios.post('/getFriends').then((res) => {
                     this.friends = res.data.data
                 })
+            },
+            openChat(friend) {
+                this.friends.forEach(friend => {
+                    friend.session.open = false
+                });
+                friend.session.open = true
             }
         },
         created() {
