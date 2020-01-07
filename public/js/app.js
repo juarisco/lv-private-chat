@@ -49779,6 +49779,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -49793,6 +49807,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         close: function close() {
             this.$emit('close');
+        },
+        clear: function clear() {
+            this.chats = [];
         }
     },
     created: function created() {
@@ -49817,6 +49834,7 @@ var render = function() {
   return _c("div", { staticClass: "card card-default chat-box" }, [
     _c("div", { staticClass: "card-header" }, [
       _vm._v("\n        Chats\n        "),
+      _vm._v(" "),
       _c(
         "a",
         {
@@ -49829,7 +49847,39 @@ var render = function() {
           }
         },
         [_c("i", { staticClass: "fa fa-times float-right" })]
-      )
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "dropdown mr-3 float-right" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "dropdown-menu",
+            attrs: { "aria-labelledby": "dropdownMenuButton" }
+          },
+          [
+            _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+              _vm._v("Block")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "dropdown-item",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.clear($event)
+                  }
+                }
+              },
+              [_vm._v("Clear Chat")]
+            )
+          ]
+        )
+      ])
     ]),
     _vm._v(" "),
     _c(
@@ -49857,11 +49907,28 @@ var render = function() {
           }
         }
       },
-      [_vm._m(0)]
+      [_vm._m(1)]
     )
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        attrs: {
+          href: "",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "fa fa-ellipsis-v" })]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
