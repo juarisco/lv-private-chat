@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <message-component></message-component>
+                <message-component v-if="open" @close="close"></message-component>
             </div>
         </div>
     </div>
@@ -18,8 +18,22 @@
 
 <script>
     import MessageComponent from "./MessageComponent";
+
     export default {
-        components:{MessageComponent},
+        components: {MessageComponent},
+        data() {
+            return {
+                open: true
+            }
+        },
+        methods: {
+            close() {
+                this.open = false
+            }
+        },
+        created() {
+
+        },
         mounted() {
             console.log('Component mounted.')
         }
