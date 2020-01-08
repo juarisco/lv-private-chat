@@ -49329,10 +49329,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         openChat: function openChat(friend) {
-            this.friends.forEach(function (friend) {
-                friend.session.open = false;
+            if (friend.session) {
+                this.friends.forEach(function (friend) {
+                    friend.session.open = false;
+                });
+                friend.session.open = true;
+            } else {
+                // create session
+                this.createSession(friend);
+            }
+        },
+        createSession: function createSession(friend) {
+            axios.post('/session/create', { friend_id: friend.id }).then(function (res) {
+                return console.log(res.data);
             });
-            friend.session.open = true;
         }
     },
     created: function created() {
@@ -50063,23 +50073,25 @@ var render = function() {
         "div",
         { staticClass: "col-md-9" },
         _vm._l(_vm.friends, function(friend) {
-          return _c(
-            "span",
-            { key: friend.id },
-            [
-              friend.session.open
-                ? _c("message-component", {
-                    attrs: { friend: friend },
-                    on: {
-                      close: function($event) {
-                        return _vm.close(friend)
-                      }
-                    }
-                  })
-                : _vm._e()
-            ],
-            1
-          )
+          return friend.session
+            ? _c(
+                "span",
+                { key: friend.id },
+                [
+                  friend.session.open
+                    ? _c("message-component", {
+                        attrs: { friend: friend },
+                        on: {
+                          close: function($event) {
+                            return _vm.close(friend)
+                          }
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
+            : _vm._e()
         }),
         0
       )
