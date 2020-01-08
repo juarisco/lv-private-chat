@@ -59,7 +59,10 @@
             },
             createSession(friend) {
                 axios.post('/session/create', {friend_id: friend.id})
-                    .then(res => friend.session = res.data)
+                    .then(res => {
+                        (friend.session = res.data.data),
+                            (friend.session.open = true)
+                    })
             },
         },
         created() {

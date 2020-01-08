@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Session;
 use Illuminate\Http\Request;
+use App\Http\Resources\SessionResource;
 
 class SessionController extends Controller
 {
@@ -16,6 +17,6 @@ class SessionController extends Controller
             ]
         );
 
-        return $session;
+        return new SessionResource($session);
     }
 }
