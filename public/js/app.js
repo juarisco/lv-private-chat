@@ -14385,8 +14385,10 @@ window.Pusher = __webpack_require__(37);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo__["a" /* default */]({
   broadcaster: 'pusher',
-  key: "",
-  cluster: "mt1",
+  // key: process.env.MIX_PUSHER_APP_KEY,
+  key: "8f0602f56356a52d6c4b",
+  // cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+  cluster: "eu",
   encrypted: true
 });
 
@@ -59185,7 +59187,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
+        var _this2 = this;
+
         this.getFriends();
+
+        Echo.join('Chat').here(function (users) {
+            _this2.friends.forEach(function (friend) {
+                users.forEach(function (user) {
+                    if (user.id == friend.id) {
+                        friend.online = true;
+                    }
+                });
+            });
+        });
     }
 });
 
