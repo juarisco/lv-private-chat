@@ -5,12 +5,14 @@
                 <div class="card card-default">
                     <div class="card-header">Private Chat App</div>
                     <ul class="list-group">
-                        <a href=""
-                           @click.prevent="openChat(friend)"
-                           v-for="friend in friends"
-                           :key="friend.id">
-                            <li class="list-group-item">{{ friend.name }}</li>
-                        </a>
+                        <li class="list-group-item"
+                            @click.prevent="openChat(friend)"
+                            :key="friend.id"
+                            v-for="friend in friends"
+                        >
+                            <a href="">{{ friend.name }}</a>
+                            <i class="fa fa-circle float-right text-success" v-if="friend.online" aria-hidden="true"></i>
+                        </li>
                     </ul>
                 </div>
             </div>

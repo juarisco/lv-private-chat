@@ -59147,6 +59147,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -59198,6 +59200,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         friend.online = true;
                     }
                 });
+            });
+        }).joining(function (user) {
+            _this2.friends.forEach(function (friend) {
+                return user.id === friend.id ? friend.online = true : '';
+            });
+        }).leaving(function (user) {
+            _this2.friends.forEach(function (friend) {
+                return user.id === friend.id ? friend.online = true : '';
             });
         });
     }
@@ -59899,10 +59909,10 @@ var render = function() {
             { staticClass: "list-group" },
             _vm._l(_vm.friends, function(friend) {
               return _c(
-                "a",
+                "li",
                 {
                   key: friend.id,
-                  attrs: { href: "" },
+                  staticClass: "list-group-item",
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -59911,9 +59921,16 @@ var render = function() {
                   }
                 },
                 [
-                  _c("li", { staticClass: "list-group-item" }, [
+                  _c("a", { attrs: { href: "" } }, [
                     _vm._v(_vm._s(friend.name))
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  friend.online
+                    ? _c("i", {
+                        staticClass: "fa fa-circle float-right text-success",
+                        attrs: { "aria-hidden": "true" }
+                      })
+                    : _vm._e()
                 ]
               )
             }),
