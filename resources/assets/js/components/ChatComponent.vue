@@ -78,6 +78,13 @@
                         })
                     })
                 })
+                .joining((user) => {
+                    this.friends.forEach(friend => user.id === friend.id ? friend.online = true : '');
+                })
+                .leaving((user) => {
+                    this.friends.forEach(friend => user.id === friend.id ? friend.online = true : '');
+
+                });
         },
 
     }
