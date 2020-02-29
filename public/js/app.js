@@ -59149,6 +59149,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -59192,6 +59193,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this2 = this;
 
         this.getFriends();
+
+        Echo.channel("Chat").listen("SessionEvent", function (e) {
+            var friend = _this2.friends.find(function (friend) {
+                return friend.id === e.session_by;
+            });
+            friend.session = e.session;
+        });
 
         Echo.join('Chat').here(function (users) {
             _this2.friends.forEach(function (friend) {

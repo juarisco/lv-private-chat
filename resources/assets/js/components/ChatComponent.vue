@@ -11,7 +11,8 @@
                             v-for="friend in friends"
                         >
                             <a href="">{{ friend.name }}</a>
-                            <i class="fa fa-circle float-right text-success" v-if="friend.online" aria-hidden="true"></i>
+                            <i class="fa fa-circle float-right text-success" v-if="friend.online"
+                               aria-hidden="true"></i>
                         </li>
                     </ul>
                 </div>
@@ -68,7 +69,13 @@
             },
         },
         created() {
-            this.getFriends()
+            this.getFriends();
+
+            Echo.channel("Chat")
+                .listen("SessionEvent", e => {
+                    let friend = this.friends.find(friend => friend.id === e.session_by);
+                    friend.session = e.session;
+                });
 
             Echo.join('Chat')
                 .here((users) => {
