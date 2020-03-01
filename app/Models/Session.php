@@ -15,6 +15,6 @@ class Session extends Model
 
     public function messages()
     {
-        return $this->newHasMany(Message::class);
+        return $this->hasMany(Message::class);
     }
 }

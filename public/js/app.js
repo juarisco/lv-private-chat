@@ -59702,12 +59702,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['friend'],
     data: function data() {
         return {
             chats: [],
+            message: null,
             session_block: false
         };
     },
@@ -59723,7 +59728,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         send: function send() {
-            console.log('yeah!');
+            if (this.message) {
+                this.chats.push(this.message);
+                axios.post('/send/' + this.friend.session.id + '}', {
+                    content: this.message
+                });
+                this.message = null;
+            }
         },
         close: function close() {
             this.$emit('close');
@@ -59856,11 +59867,28 @@ var render = function() {
       [
         _c("div", { staticClass: "form-group" }, [
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.message,
+                expression: "message"
+              }
+            ],
             staticClass: "form-control",
             attrs: {
               type: "text",
               placeholder: "write your message here",
               disabled: _vm.session_block
+            },
+            domProps: { value: _vm.message },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.message = $event.target.value
+              }
             }
           })
         ])
