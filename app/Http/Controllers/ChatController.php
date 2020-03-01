@@ -11,6 +11,18 @@ class ChatController extends Controller
     {
         $message = $session->messages()->create(['content' => $request->content]);
 
+        $message->chats()->create([
+            'session_id' => $session->id,
+            'type' => 0,
+            'user_id' => auth()->id()
+        ]);
+
+        $message->chats()->create([
+            'session_id' => $session->id,
+            'type' => 1,
+            'user_id' => $request->to_user
+        ]);
+
         return $message;
     }
 }
