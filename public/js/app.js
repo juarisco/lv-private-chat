@@ -59859,7 +59859,7 @@ var render = function() {
         return _c(
           "p",
           {
-            key: chat.message,
+            key: chat.id,
             staticClass: "card-text",
             class: { "text-right": chat.type == 0 }
           },
