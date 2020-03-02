@@ -55,6 +55,17 @@
         },
         created() {
             this.getAllMessages();
+
+            Echo.private(`Chat.${this.friend.session.id}`)
+                .listen('PrivateChatEvent', e => {
+                    this.chats.push(
+                        {
+                            message: e.content,
+                            type: 1,
+                            sent_at: "Just now"
+                        }
+                    );
+                });
         },
         methods: {
             send() {

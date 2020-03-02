@@ -59717,7 +59717,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     created: function created() {
+        var _this = this;
+
         this.getAllMessages();
+
+        Echo.private('Chat.' + this.friend.session.id).listen('PrivateChatEvent', function (e) {
+            _this.chats.push({
+                message: e.content,
+                type: 1,
+                sent_at: "Just now"
+            });
+        });
     },
 
     methods: {
@@ -59752,10 +59762,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.session_block = false;
         },
         getAllMessages: function getAllMessages() {
-            var _this = this;
+            var _this2 = this;
 
             axios.post('/session/' + this.friend.session.id + '/chats').then(function (res) {
-                return _this.chats = res.data.data;
+                return _this2.chats = res.data.data;
             });
         }
     }
