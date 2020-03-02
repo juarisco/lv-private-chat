@@ -59717,13 +59717,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     created: function created() {
-        this.chats.push({
-            message: 'Hey'
-        }, {
-            message: 'How are u?'
-        }, {
-            message: 'Im at bottom'
-        });
+        this.getAllMessages();
     },
 
     methods: {
@@ -59752,6 +59746,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         unblock: function unblock() {
             this.session_block = false;
+        },
+        getAllMessages: function getAllMessages() {
+            var _this = this;
+
+            axios.post('/session/' + this.friend.session.id + '/chats').then(function (res) {
+                return _this.chats = res.data;
+            });
         }
     }
 });
