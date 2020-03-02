@@ -54,17 +54,7 @@
             }
         },
         created() {
-            this.chats.push(
-                {
-                    message: 'Hey'
-                },
-                {
-                    message: 'How are u?'
-                },
-                {
-                    message: 'Im at bottom'
-                }
-            )
+            this.getAllMessages();
         },
         methods: {
             send() {
@@ -92,6 +82,11 @@
             },
             unblock() {
                 this.session_block = false
+            },
+            getAllMessages() {
+                axios
+                    .post(`/session/${this.friend.session.id}/chats`)
+                    .then(res => (this.chats = res.data))
             }
         }
     }

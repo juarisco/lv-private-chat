@@ -17,4 +17,9 @@ class ChatController extends Controller
 
         return response($message,200);
     }
+
+    public function chats()
+    {
+        
+    }
 }
